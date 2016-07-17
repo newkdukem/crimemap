@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/style.css') }}" />
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
     <script type="text/javascript">
       var map;
@@ -15,6 +16,18 @@
       function(event){
         placeMarker(event.latLng);
       });
+      placeCrimes({{crimes | safe}});
+      }
+      function placeCrimes(crimes) {
+        for (i=0; i<crimes.length; i++) {
+          crime = new google.maps.Marker( {
+            position: new google.maps.LatLng(crimes[i].latitude, crimes[i].longitude),
+            map: map,
+            title: crimes[i].date + "\n" +
+            crimes[i].category + "\n" +
+            crimes[i].description
+          });
+        }
       }
       function placeMarker(location) {
         if (marker) {
@@ -25,13 +38,15 @@
             map: map
           });
         }
+        document.getElementById('latitude').value = location.lat();
+        document.getElementById('longitude').value = location.lng();
       }
     </script>
   </head>
   <body onload="initialize()">
     <h1>Crime Map</h1>
     <p>A map of recent criminal activity in the Skopje area</p>
-    <div id="map-canvas" style="width:80%; height:500px;"></div>
+    <div id="map-canvas"></div>
     <div id="newcrimeform">
       <h2>Submit new crime</h2>
       <form action="/submitcrime" method="POST">
