@@ -51,17 +51,17 @@
       <h2>Submit new crime</h2>
       <form action="/submitcrime" method="POST">
         <label for="category">Category</label>
-        <select name="category" id="category">
-          <option value="treason">Treason</option>
-          <option value="theft">Theft</option>
-          <option value="oppression">Oppression</option>
+        <select name="category" id="categories">
+          {% for category in categories %}
+            <option value="{{category}}">{{category}}</option>
+          {% endfor %}
         </select>
         <label for="date">Date</label>
         <input name="date" id="date" type="date">
         <label for="latitude">Latitude</label>
-        <input name="latitude" id="latitude" type="text">
+        <input name="latitude" id="latitude" type="text" readonly>
         <label for="longitude">Longitude</label>
-        <input name="longitude" id="longitude" type="text">
+        <input name="longitude" id="longitude" type="text" readonly>
         <label for="description">Description</label>
         <textarea name="description" id="description" placeholder="A brief but detailed description of the crime"></textarea>
         <input type="submit" value="Submit">
