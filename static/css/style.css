@@ -36,3 +36,15 @@ input[type="submit"]:hover {
   width: 25%;
   margin-right: 10px;
 }
+
+#error {
+  color: red;
+}
+
+#latitude {
+  color: grey;
+}
+
+#longitude {
+  color: grey;
+}

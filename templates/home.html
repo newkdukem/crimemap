@@ -9,7 +9,7 @@
       function initialize() {
       var mapOptions = {
       center: new google.maps.LatLng(42.000538, 21.428447),
-      zoom: 20
+      zoom: 17
       };
       map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
       google.maps.event.addListener(map, 'click',
@@ -49,6 +49,9 @@
     <div id="map-canvas"></div>
     <div id="newcrimeform">
       <h2>Submit new crime</h2>
+      {% if error_message %}
+        <div id="error"><p>{{error_message}}</p></div>
+      {% endif %}
       <form action="/submitcrime" method="POST">
         <label for="category">Category</label>
         <select name="category" id="categories">
